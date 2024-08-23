@@ -1,8 +1,8 @@
 // src/components/user/Register.js
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import axios from 'axios';
 
 function Register() {
     const [formData, setFormData] = useState({
@@ -35,7 +35,6 @@ function Register() {
         e.preventDefault();
         setError('');
 
-        // Validation basique
         if (formData.password !== formData.confirmPassword) {
             setError('Les mots de passe ne correspondent pas.');
             return;
@@ -50,15 +49,21 @@ function Register() {
                 formDataToSend.append('profilePicture', formData.profilePicture);
             }
 
-            const success = await register(formDataToSend);
-            if (success) {
+            const response = await axios.post('/api/register', formDataToSend, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
+            if (response.data.token) {
+                localStorage.setItem('token', response.data.token);
                 navigate('/profile');
             } else {
                 setError('Échec de l\'inscription. Veuillez réessayer.');
             }
         } catch (error) {
-            console.error('Erreur lors de l\'inscription:', error);
-            setError('Une erreur est survenue lors de l\'inscription.');
+            console.error('Erreur lors de l\'inscription:', error.response.data);
+            setError(error.response.data.message || 'Une erreur est survenue lors de l\'inscription.');
         }
     };
 
