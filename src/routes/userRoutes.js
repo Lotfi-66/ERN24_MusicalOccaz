@@ -9,14 +9,15 @@ router.post('/register', async (req, res) => {
         const { username, email, password } = req.body;
         let user = await User.findOne({ email });
         if (user) {
-            return res.status(400).json({ message: 'User already exists' });
+            return res.status(400).json({ message: 'Cet utilisateur existe déjà' });
         }
         user = new User({ username, email, password });
         await user.save();
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
         res.status(201).json({ user: { id: user._id, username: user.username, email: user.email }, token });
     } catch (error) {
-        res.status(500).json({ message: 'Server error' });
+        console.error('Erreur d\'inscription:', error);
+        res.status(500).json({ message: 'Erreur serveur', error: error.message });
     }
 });
 

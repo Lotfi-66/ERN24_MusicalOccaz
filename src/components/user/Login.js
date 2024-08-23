@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import global from '../../styles/global.css';
 
 function Login() {
     const [isLogin, setIsLogin] = useState(true);
@@ -8,17 +9,22 @@ function Login() {
     const { login, register } = useAuth();
     const navigate = useNavigate();
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setCredentials(prev => ({ ...prev, [name]: value }));
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let success;
         try {
+            let success;
             if (isLogin) {
                 success = await login(credentials.email, credentials.password);
             } else {
                 success = await register(credentials.username, credentials.email, credentials.password);
             }
             if (success) {
-                navigate('/profile');
+                navigate('/');  // Rediriger vers la page d'accueil après connexion/inscription
             } else {
                 alert(isLogin ? 'Échec de la connexion' : 'Échec de l\'inscription');
             }
@@ -26,16 +32,6 @@ function Login() {
             console.error('Erreur:', error);
             alert('Une erreur est survenue');
         }
-    };
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setCredentials(prev => ({ ...prev, [name]: value }));
-    };
-
-    const toggleMode = () => {
-        setIsLogin(!isLogin);
-        setCredentials({ username: '', email: '', password: '' });
     };
 
     return (
@@ -70,7 +66,7 @@ function Login() {
                 />
                 <button type="submit">{isLogin ? 'Se connecter' : 'S\'inscrire'}</button>
             </form>
-            <button onClick={toggleMode} className="toggle-auth-mode">
+            <button onClick={() => setIsLogin(!isLogin)} className="toggle-auth-mode">
                 {isLogin ? 'Créer un compte' : 'Déjà un compte ? Se connecter'}
             </button>
         </div>

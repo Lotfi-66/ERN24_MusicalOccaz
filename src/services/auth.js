@@ -1,15 +1,11 @@
-export const register = async (userData) => {
-    const response = await fetch('http://localhost:5000/api/register', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData),
-    });
+import api from './api';
 
-    if (!response.ok) {
-        throw new Error('Erreur lors de l\'inscription');
-    }
+export const login = async (email, password) => {
+    const response = await api.post('/users/login', { email, password });
+    return response.data;
+};
 
-    return await response.json();
+export const register = async (username, email, password) => {
+    const response = await api.post('/users/register', { username, email, password });
+    return response.data;
 };

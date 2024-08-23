@@ -1,126 +1,81 @@
-/* Styles globaux */
-html,
+/* src/styles/global.css */
+
 body {
-    height: 100%;
-    /* Assurez-vous que le corps prend toute la hauteur */
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
     margin: 0;
     padding: 0;
 }
 
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #121212;
-    /* Fond sombre */
-    color: #ffffff;
-    /* Texte en blanc */
+.App {
     display: flex;
     flex-direction: column;
-    /* Aligne les éléments verticalement */
-}
-
-.App {
-    flex: 1;
-    /* Permet à l'App de prendre tout l'espace disponible */
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+    min-height: 100vh;
 }
 
 header {
-    background-color: #1f1f1f;
-    /* Couleur de fond de l'en-tête */
-    padding: 10px 0;
-}
-
-nav {
-    display: flex;
-    justify-content: space-around;
-}
-
-nav a {
-    color: #ffffff;
-    /* Liens en blanc */
-    text-decoration: none;
-    padding: 10px;
-    transition: color 0.3s;
-}
-
-nav a:hover {
-    color: #ff4081;
-    /* Couleur au survol */
+    background-color: #007bff;
+    color: white;
+    padding: 20px;
+    text-align: center;
 }
 
 footer {
-    background-color: #1f1f1f;
+    background-color: #007bff;
+    color: white;
     text-align: center;
-    padding: 10px 0;
-    width: 100%;
+    padding: 10px;
+    margin-top: auto;
 }
 
 .auth-form {
-    max-width: 800px;
-    /* Largeur maximale du formulaire */
-    margin: 150px auto;
-    /* Centre le formulaire */
-    padding: 40px;
-    /* Ajoute du padding à l'intérieur */
-    background-color: #2a2a2a;
-    /* Fond du formulaire */
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
     border-radius: 8px;
-    /* Coins arrondis */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    /* Ombre pour un effet de profondeur */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .auth-form h2 {
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .auth-form input {
     width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #444;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
     border-radius: 4px;
-    background-color: #333;
-    /* Fond des champs de saisie */
-    color: #ffffff;
-    /* Texte en blanc */
+    box-sizing: border-box;
+    /* Pour inclure le padding dans la largeur */
 }
 
 .auth-form button {
     width: 100%;
     padding: 10px;
-    background-color: #ff4081;
-    /* Couleur des boutons */
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 40px;
+    transition: background-color 0.3s;
 }
 
 .auth-form button:hover {
-    background-color: #e91e63;
-    /* Couleur au survol */
+    background-color: #0056b3;
 }
 
 .toggle-auth-mode {
     background: none;
     border: none;
-    color: #ff4081;
+    color: #007bff;
     cursor: pointer;
-    margin-top: 15px;
     text-decoration: underline;
+    margin-top: 10px;
 }
 
 .toggle-auth-mode:hover {
-    color: #e91e63;
-}
-
-/* Styles pour le footer */
-footer {
-    margin-top: auto;
-    /* Permet au footer de rester en bas */
+    color: #0056b3;
 }
