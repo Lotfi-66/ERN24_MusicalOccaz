@@ -1,10 +1,15 @@
-/* src/styles/global.css */
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+/* Réinitialisation et styles de base */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
 }
 
 .App {
@@ -13,69 +18,168 @@ body {
     min-height: 100vh;
 }
 
+/* Header */
 header {
-    background-color: #007bff;
-    color: white;
-    padding: 20px;
-    text-align: center;
+    background-color: #1a1a2e;
+    color: #fff;
+    padding: 1rem 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #ffd700;
+}
+
+/* Main content */
+main {
+    flex: 1;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Footer */
 footer {
-    background-color: #007bff;
-    color: white;
+    background-color: #1a1a2e;
+    color: #fff;
     text-align: center;
-    padding: 10px;
+    padding: 1rem 0;
     margin-top: auto;
 }
 
+/* Auth Form */
 .auth-form {
     max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #ffffff;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .auth-form h2 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 1.5rem;
+    color: #1a1a2e;
 }
 
 .auth-form input {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
     border-radius: 4px;
-    box-sizing: border-box;
-    /* Pour inclure le padding dans la largeur */
+    font-size: 1rem;
 }
 
 .auth-form button {
     width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
+    padding: 0.8rem;
+    background-color: #ffd700;
+    color: #1a1a2e;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
 .auth-form button:hover {
-    background-color: #0056b3;
+    background-color: #e6c200;
 }
 
 .toggle-auth-mode {
     background: none;
     border: none;
-    color: #007bff;
+    color: #1a1a2e;
     cursor: pointer;
     text-decoration: underline;
-    margin-top: 10px;
+    margin-top: 1rem;
+    font-size: 0.9rem;
 }
 
-.toggle-auth-mode:hover {
-    color: #0056b3;
+/* Listing styles */
+.listing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.listing-card {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.listing-card:hover {
+    transform: translateY(-5px);
+}
+
+.listing-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.listing-info {
+    padding: 1rem;
+}
+
+.listing-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #1a1a2e;
+}
+
+.listing-price {
+    font-weight: bold;
+    color: #ffd700;
+}
+
+/* Button styles */
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #ffd700;
+    color: #1a1a2e;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #e6c200;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+    }
+
+    nav a {
+        margin-bottom: 0.5rem;
+    }
+
+    .listing-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
 }
