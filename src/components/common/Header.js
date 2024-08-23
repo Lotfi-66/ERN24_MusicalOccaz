@@ -1,21 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
-function Header({ user, onLogout }) {
+function Header() {
+    const { user, logout } = useAuth();
+
     return (
         <header>
             <nav>
                 <Link to="/">MusicalOccaz</Link>
+                <Link to="/listings">Annonces</Link>
                 {user ? (
                     <>
+                        <Link to="/publish">Publier une annonce</Link>
                         <Link to="/profile">Profil</Link>
-                        <button onClick={onLogout}>Déconnexion</button>
+                        <button onClick={logout}>Déconnexion</button>
                     </>
                 ) : (
-                    <>
-                        <Link to="/login">Connexion</Link>
-                        <Link to="/register">Inscription</Link>
-                    </>
+                    <Link to="/profile">Connexion/Inscription</Link>
                 )}
             </nav>
         </header>

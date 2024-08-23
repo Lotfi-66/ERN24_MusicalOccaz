@@ -1,0 +1,126 @@
+/* Styles globaux */
+html,
+body {
+    height: 100%;
+    /* Assurez-vous que le corps prend toute la hauteur */
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;
+    /* Fond sombre */
+    color: #ffffff;
+    /* Texte en blanc */
+    display: flex;
+    flex-direction: column;
+    /* Aligne les éléments verticalement */
+}
+
+.App {
+    flex: 1;
+    /* Permet à l'App de prendre tout l'espace disponible */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background-color: #1f1f1f;
+    /* Couleur de fond de l'en-tête */
+    padding: 10px 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+}
+
+nav a {
+    color: #ffffff;
+    /* Liens en blanc */
+    text-decoration: none;
+    padding: 10px;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #ff4081;
+    /* Couleur au survol */
+}
+
+footer {
+    background-color: #1f1f1f;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+}
+
+.auth-form {
+    max-width: 800px;
+    /* Largeur maximale du formulaire */
+    margin: 150px auto;
+    /* Centre le formulaire */
+    padding: 40px;
+    /* Ajoute du padding à l'intérieur */
+    background-color: #2a2a2a;
+    /* Fond du formulaire */
+    border-radius: 8px;
+    /* Coins arrondis */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    /* Ombre pour un effet de profondeur */
+}
+
+.auth-form h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #333;
+    /* Fond des champs de saisie */
+    color: #ffffff;
+    /* Texte en blanc */
+}
+
+.auth-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff4081;
+    /* Couleur des boutons */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 40px;
+}
+
+.auth-form button:hover {
+    background-color: #e91e63;
+    /* Couleur au survol */
+}
+
+.toggle-auth-mode {
+    background: none;
+    border: none;
+    color: #ff4081;
+    cursor: pointer;
+    margin-top: 15px;
+    text-decoration: underline;
+}
+
+.toggle-auth-mode:hover {
+    color: #e91e63;
+}
+
+/* Styles pour le footer */
+footer {
+    margin-top: auto;
+    /* Permet au footer de rester en bas */
+}

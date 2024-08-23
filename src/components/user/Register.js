@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 
 function Register({ onRegister }) {
-    const [userData, setUserData] = useState({ username: '', password: '', email: '' });
+    const [user, setUser] = useState({ username: '', email: '', password: '' });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setUserData(prev => ({ ...prev, [name]: value }));
+        setUser(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        onRegister(userData);
+        // Appel à la fonction d'inscription
+        await onRegister(user);
     };
 
     return (
@@ -18,25 +19,25 @@ function Register({ onRegister }) {
             <input
                 type="text"
                 name="username"
-                value={userData.username}
-                onChange={handleChange}
                 placeholder="Nom d'utilisateur"
+                value={user.username}
+                onChange={handleChange}
                 required
             />
             <input
                 type="email"
                 name="email"
-                value={userData.email}
-                onChange={handleChange}
                 placeholder="Email"
+                value={user.email}
+                onChange={handleChange}
                 required
             />
             <input
                 type="password"
                 name="password"
-                value={userData.password}
-                onChange={handleChange}
                 placeholder="Mot de passe"
+                value={user.password}
+                onChange={handleChange}
                 required
             />
             <button type="submit">S'inscrire</button>
