@@ -8,16 +8,15 @@ function Header() {
     return (
         <header>
             <nav>
-                <Link to="/">MusicalOccaz</Link>
+                <Link to="/">Accueil</Link>
                 <Link to="/listings">Annonces</Link>
                 {user ? (
                     <>
-                        <Link to="/publish">Publier une annonce</Link>
                         <Link to="/profile">Profil</Link>
                         <button onClick={logout}>Déconnexion</button>
                     </>
                 ) : (
-                    <Link to="/profile">Connexion/Inscription</Link>
+                    <Link to="/connexion">Connexion</Link>
                 )}
             </nav>
         </header>

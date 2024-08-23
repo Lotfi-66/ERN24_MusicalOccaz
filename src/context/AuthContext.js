@@ -18,9 +18,9 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    const register = async (formData) => {
+    const register = async (userData) => {
         try {
-            const response = await apiRegister(formData);
+            const response = await apiRegister(userData);
             setUser(response.user);
             localStorage.setItem('token', response.token);
             return true;

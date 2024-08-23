@@ -1,38 +1,27 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Login from '../components/user/Login';
-import Register from '../components/user/Register';
+import React from 'react';
 import { useAuth } from '../context/AuthContext';
+import { Navigate, Link } from 'react-router-dom';
 
 function UserProfile() {
-    const [isLogin, setIsLogin] = useState(true);
     const { user } = useAuth();
-    const navigate = useNavigate();
 
-    if (user) {
+    if (!user) {
         return (
-            <div className="profile">
-                <h2>Profil de {user.username}</h2>
-                {user.profilePicture && <img src={user.profilePicture} alt="Profile" className="profile-picture" />}
-                <p>Email: {user.email}</p>
-                {/* Ajoutez d'autres informations de profil ici */}
+            <div>
+                <h2>Vous n'êtes pas connecté</h2>
+                <p>Veuillez vous connecter pour accéder à votre profil.</p>
+                <Link to="/connexion">Se connecter</Link>
+                <br />
+                <Link to="/inscription">S'inscrire</Link> {/* Lien vers l'inscription */}
             </div>
         );
     }
 
     return (
-        <div className="auth-container">
-            {isLogin ? (
-                <>
-                    <Login />
-                    <p>Pas encore de compte ? <button onClick={() => setIsLogin(false)}>S'inscrire</button></p>
-                </>
-            ) : (
-                <>
-                    <Register />
-                    <p>Déjà un compte ? <button onClick={() => setIsLogin(true)}>Se connecter</button></p>
-                </>
-            )}
+        <div className="profile">
+            <h2>Profil de {user.username}</h2>
+            <p>Email: {user.email}</p>
+            {/* Ajoutez d'autres informations de profil ici */}
         </div>
     );
 }

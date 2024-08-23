@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import global from '../../styles/global.css';
 
 function Login() {
-    const [isLogin, setIsLogin] = useState(true);
-    const [credentials, setCredentials] = useState({ username: '', email: '', password: '' });
-    const { login, register } = useAuth();
+    const [credentials, setCredentials] = useState({ email: '', password: '' });
+    const { login } = useAuth();
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -17,16 +15,11 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            let success;
-            if (isLogin) {
-                success = await login(credentials.email, credentials.password);
-            } else {
-                success = await register(credentials.username, credentials.email, credentials.password);
-            }
+            const success = await login(credentials.email, credentials.password);
             if (success) {
-                navigate('/');  // Rediriger vers la page d'accueil après connexion/inscription
+                navigate('/profile');
             } else {
-                alert(isLogin ? 'Échec de la connexion' : 'Échec de l\'inscription');
+                alert('Échec de la connexion');
             }
         } catch (error) {
             console.error('Erreur:', error);
@@ -35,19 +28,9 @@ function Login() {
     };
 
     return (
-        <div className="auth-form">
-            <h2>{isLogin ? 'Connexion' : 'Inscription'}</h2>
-            <form onSubmit={handleSubmit}>
-                {!isLogin && (
-                    <input
-                        type="text"
-                        name="username"
-                        value={credentials.username}
-                        onChange={handleChange}
-                        placeholder="Nom d'utilisateur"
-                        required
-                    />
-                )}
+        <div className="auth-container">
+            <form onSubmit={handleSubmit} className="auth-form">
+                <h2>Connexion</h2>
                 <input
                     type="email"
                     name="email"
@@ -64,11 +47,11 @@ function Login() {
                     placeholder="Mot de passe"
                     required
                 />
-                <button type="submit">{isLogin ? 'Se connecter' : 'S\'inscrire'}</button>
+                <button type="submit">Se connecter</button>
             </form>
-            <button onClick={() => setIsLogin(!isLogin)} className="toggle-auth-mode">
-                {isLogin ? 'Créer un compte' : 'Déjà un compte ? Se connecter'}
-            </button>
+            <p>
+                Pas encore de compte ? <Link to="/inscription">S'inscrire</Link>
+            </p>
         </div>
     );
 }

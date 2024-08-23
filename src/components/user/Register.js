@@ -1,84 +1,117 @@
+// src/components/user/Register.js
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
 function Register() {
-    const [userData, setUserData] = useState({
+    const [formData, setFormData] = useState({
         username: '',
         email: '',
         password: '',
+        confirmPassword: '',
         profilePicture: null
     });
+    const [error, setError] = useState('');
     const { register } = useAuth();
     const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setUserData(prev => ({ ...prev, [name]: value }));
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
     };
 
     const handleFileChange = (e) => {
-        setUserData(prev => ({ ...prev, profilePicture: e.target.files[0] }));
+        setFormData(prevState => ({
+            ...prevState,
+            profilePicture: e.target.files[0]
+        }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError('');
+
+        // Validation basique
+        if (formData.password !== formData.confirmPassword) {
+            setError('Les mots de passe ne correspondent pas.');
+            return;
+        }
+
         try {
-            const formData = new FormData();
-            formData.append('username', userData.username);
-            formData.append('email', userData.email);
-            formData.append('password', userData.password);
-            if (userData.profilePicture) {
-                formData.append('profilePicture', userData.profilePicture);
+            const formDataToSend = new FormData();
+            formDataToSend.append('username', formData.username);
+            formDataToSend.append('email', formData.email);
+            formDataToSend.append('password', formData.password);
+            if (formData.profilePicture) {
+                formDataToSend.append('profilePicture', formData.profilePicture);
             }
 
-            const success = await register(formData);
+            const success = await register(formDataToSend);
             if (success) {
                 navigate('/profile');
             } else {
-                alert('Échec de l\'inscription');
+                setError('Échec de l\'inscription. Veuillez réessayer.');
             }
         } catch (error) {
-            console.error('Erreur:', error);
-            alert('Une erreur est survenue');
+            console.error('Erreur lors de l\'inscription:', error);
+            setError('Une erreur est survenue lors de l\'inscription.');
         }
     };
 
     return (
-        <form onSubmit={handleSubmit} className="auth-form">
-            <h2>Inscription</h2>
-            <input
-                type="text"
-                name="username"
-                value={userData.username}
-                onChange={handleChange}
-                placeholder="Pseudo"
-                required
-            />
-            <input
-                type="email"
-                name="email"
-                value={userData.email}
-                onChange={handleChange}
-                placeholder="Email"
-                required
-            />
-            <input
-                type="password"
-                name="password"
-                value={userData.password}
-                onChange={handleChange}
-                placeholder="Mot de passe"
-                required
-            />
-            <input
-                type="file"
-                name="profilePicture"
-                onChange={handleFileChange}
-                accept="image/*"
-            />
-            <button type="submit">S'inscrire</button>
-        </form>
+        <div className="auth-container">
+            <form onSubmit={handleSubmit} className="auth-form">
+                <h2>Inscription</h2>
+                {error && <p className="error-message">{error}</p>}
+                <input
+                    type="text"
+                    name="username"
+                    value={formData.username}
+                    onChange={handleChange}
+                    placeholder="Nom d'utilisateur"
+                    required
+                />
+                <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Email"
+                    required
+                />
+                <input
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    placeholder="Mot de passe"
+                    required
+                />
+                <input
+                    type="password"
+                    name="confirmPassword"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                    placeholder="Confirmer le mot de passe"
+                    required
+                />
+                <div className="file-input">
+                    <label htmlFor="profilePicture">Photo de profil</label>
+                    <input
+                        type="file"
+                        id="profilePicture"
+                        name="profilePicture"
+                        onChange={handleFileChange}
+                        accept="image/*"
+                    />
+                </div>
+                <button type="submit">S'inscrire</button>
+            </form>
+        </div>
     );
 }
 
