@@ -64,17 +64,3 @@ npm start
 
 2. L'application devrait maintenant être accessible à l'adresse `http://localhost:3000`
 
-## Structure du projet
-
-MusicalOccaz/
-├── public/
-├── src/
-│ ├── components/
-│ ├── pages/
-│ ├── services/
-│ ├── styles/
-│ ├── App.js
-│ └── index.js
-├── .gitignore
-├── package.json
-└── README.md
